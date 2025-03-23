@@ -1,6 +1,5 @@
 package org.example.productservice.controller;
-import org.example.productservice.model.dto.ReduceQuantityDto;
-import org.example.productservice.model.entity.ProductEntity;
+import org.example.productservice.model.ProductEntity;
 import org.example.productservice.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8083"})
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
@@ -60,8 +59,23 @@ public class ProductController {
     // Endpoint для уменьшения количества товара
     @PostMapping("/reduceQuantity")
     public ResponseEntity<Void> reduceQuantity(@RequestBody ReduceQuantityDto request) {
-        productService.reduceQuantity(request.productId(), request.quantityToReduce());
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            productService.reduceQuantity(request.productId(), request.quantityToReduce());
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().contains("Product not found")) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else if (e.getMessage().contains("Not enough quantity")) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 }
 
+record ReduceQuantityDto(
+        Long productId,
+        Integer quantityToReduce
+) {
+}

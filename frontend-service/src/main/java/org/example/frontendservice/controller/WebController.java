@@ -9,6 +9,6 @@ public class WebController {
 
     @GetMapping("/")
     public String home() {
-        return "index.html"; // Возвращает HTML страницу из ресурсов
+        return "index.html";
     }
 }

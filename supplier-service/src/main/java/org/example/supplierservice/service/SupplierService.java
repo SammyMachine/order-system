@@ -31,6 +31,8 @@ public class SupplierService {
     }
 
     public void deleteSupplier(Long id) {
+        supplierRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Supplier not found"));
         supplierRepository.deleteById(id);
     }
 

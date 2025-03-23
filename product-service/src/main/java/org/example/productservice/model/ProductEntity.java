@@ -1,4 +1,4 @@
-package org.example.productservice.model.entity;
+package org.example.productservice.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,3 +24,4 @@ public class ProductEntity {
     private Integer quantity;
     private Long supplierId;
 }
+

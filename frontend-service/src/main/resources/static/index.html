@@ -9,12 +9,14 @@
             display: flex;
             justify-content: space-between;
         }
+
         .section {
             width: 32%;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
         }
+
         .section h2 {
             text-align: center;
         }
@@ -25,16 +27,46 @@
     <!-- Продукты -->
     <div class="section" id="products-section">
         <h2>Продукты</h2>
+        <h3>Добавить продукт</h3>
         <form id="createProductForm">
-            <input type="text" id="productName" placeholder="Название продукта" required>
-            <input type="number" id="productQuantity" placeholder="Количество" required>
-            <button type="submit">Создать продукт</button>
+            <label for="productName">Название:</label><br><br>
+            <input type="text" id="productName" required><br><br>
+            <label for="storageLocation">Место хранения:</label><br><br>
+            <input type="text" id="storageLocation" required><br><br>
+            <label for="productQuantity">Количество:</label><br><br>
+            <input type="number" id="productQuantity" required><br><br>
+            <label for="supplierId">ID поставщика:</label><br><br>
+            <input type="number" id="supplierId" required><br><br>
+            <button type="submit">Создать продукт</button><br><br>
         </form>
-
-        <button onclick="getAllProducts()">Получить все продукты</button>
-        <button onclick="getAvailableProducts()">Получить доступные продукты</button>
-        <button onclick="getProductsToReplenish()">Получить продукты для пополнения</button>
-        <button onclick="getProductsBySupplier()">Получить продукты по поставщику</button>
+        <hr>
+        <h3>Обновить продукт</h3>
+        <form id="updateProductForm">
+            <label for="updateProductId">ID продукта:</label><br><br>
+            <input type="number" id="updateProductId" required><br><br>
+            <label for="updateProductName">Название:</label><br><br>
+            <input type="text" id="updateProductName"><br><br>
+            <label for="updateStorageLocation">Место хранения:</label><br><br>
+            <input type="text" id="updateStorageLocation"><br><br>
+            <label for="updateProductQuantity">Количество:</label><br><br>
+            <input type="number" id="updateProductQuantity"><br><br>
+            <label for="updateSupplierId">ID поставщика:</label><br><br>
+            <input type="number" id="updateSupplierId"><br><br>
+            <button type="submit">Обновить продукт</button><br><br>
+        </form>
+        <hr>
+        <h3>Удалить продукт</h3>
+        <form id="deleteProductForm">
+            <label for="deleteProductId">ID продукта:</label><br><br>
+            <input type="number" id="deleteProductId" required><br><br>
+            <button type="submit">Удалить продукт</button><br><br>
+        </form>
+        <hr>
+        <h3>Получить информацию о продуктах</h3>
+        <button onclick="getAllProducts()">Получить все продукты</button><br><br>
+        <button onclick="getAvailableProducts()">Получить доступные продукты</button><br><br>
+        <button onclick="getProductsToReplenish()">Получить продукты для пополнения</button><br><br>
+        <button onclick="getProductsBySupplier()">Получить продукты по поставщику</button><br><br>
 
         <div id="productList"></div>
     </div>
@@ -42,11 +74,38 @@
     <!-- Поставщики -->
     <div class="section" id="suppliers-section">
         <h2>Поставщики</h2>
+        <h3>Создать нового поставщика</h3>
         <form id="createSupplierForm">
-            <input type="text" id="supplierName" placeholder="Название поставщика" required>
-            <button type="submit">Создать поставщика</button>
+            <label for="supplierName">Название поставщика:</label><br><br>
+            <input type="text" id="supplierName" required><br><br>
+            <label for="supplierAddress">Адрес:</label><br><br>
+            <input type="text" id="supplierAddress" required><br><br>
+            <label for="supplierPhone">Телефон:</label><br><br>
+            <input type="text" id="supplierPhone" required><br><br>
+            <button type="submit">Создать поставщика</button><br><br>
         </form>
-
+        <hr>
+        <h3>Обновить поставщика</h3>
+        <form id="updateSupplierForm">
+            <label for="updateIdSupplier">ID поставщика:</label><br><br>
+            <input type="number" id="updateIdSupplier" required><br><br>
+            <label for="updateSupplierName">Название поставщика:</label><br><br>
+            <input type="text" id="updateSupplierName" placeholder="Новое название" required><br><br>
+            <label for="updateSupplierAddress">Адрес:</label><br><br>
+            <input type="text" id="updateSupplierAddress" placeholder="Новый адрес" required><br><br>
+            <label for="updateSupplierPhone">Телефон:</label><br><br>
+            <input type="text" id="updateSupplierPhone" placeholder="Новый телефон" required><br><br>
+            <button type="submit">Обновить поставщика</button><br><br>
+        </form>
+        <hr>
+        <h3>Удалить поставщика</h3>
+        <form id="deleteSupplierForm">
+            <label for="deleteSupplierId">ID поставщика:</label><br><br>
+            <input type="number" id="deleteSupplierId" required><br><br>
+            <button type="submit">Удалить поставщика</button><br><br>
+        </form>
+        <hr>
+        <h3>Получить информацию о поставщиках</h3>
         <button onclick="getAllSuppliers()">Получить всех поставщиков</button>
         <div id="supplierList"></div>
     </div>
@@ -54,41 +113,139 @@
     <!-- Заказы -->
     <div class="section" id="orders-section">
         <h2>Заказы</h2>
+        <h3>Создать заказ</h3>
         <form id="createOrderForm">
-            <input type="text" id="orderDescription" placeholder="Описание заказа" required>
-            <button type="submit">Создать заказ</button>
+            <label for="orderProductIds">ID товаров (через запятую):</label><br><br>
+            <input type="text" id="orderProductIds" placeholder="Например: 1,2,3" required><br><br>
+
+            <label for="orderQuantities">Количество (через запятую):</label><br><br>
+            <input type="text" id="orderQuantities" placeholder="Например: 5,2,1" required><br><br>
+
+            <button type="submit">Создать заказ</button><br><br>
         </form>
-
-        <button onclick="getAllOrders()">Получить все заказы</button>
-        <button onclick="getOrderById()">Получить заказ по ID</button>
-
+        <hr>
+        <h3>Получить информацию о заказах</h3>
+        <button onclick="getAllOrders()">Получить все заказы</button><br><br>
+        <button onclick="getOrderById()">Получить заказ по ID</button><br><br>
         <div id="orderList"></div>
     </div>
 </div>
 
 <script>
     // Продукты
-    document.getElementById("createProductForm").addEventListener("submit", function(e) {
+    document.getElementById("createProductForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
         const productName = document.getElementById("productName").value;
+        const storageLocation = document.getElementById("storageLocation").value;
         const productQuantity = document.getElementById("productQuantity").value;
+        const supplierId = document.getElementById("supplierId").value;
 
-        const productData = {
-            name: productName,
-            quantity: productQuantity
-        };
-
-        fetch('http://localhost:8081/api/v1/products', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(productData)
-        })
+        // Получаем всех поставщиков
+        fetch('http://localhost:8082/api/v1/suppliers')
             .then(response => response.json())
-            .then(data => alert("Продукт создан: " + data.name))
-            .catch(error => console.error("Ошибка создания продукта: ", error));
+            .then(suppliers => {
+                const supplierExists = suppliers.some(supplier => supplier.id === parseInt(supplierId, 10));
+                if (!supplierExists) {
+                    alert("Нет такого поставщика!");
+                    return;
+                }
+                const productData = {
+                    name: productName,
+                    storageLocation: storageLocation,
+                    quantity: parseInt(productQuantity, 10),
+                    supplierId: parseInt(supplierId, 10)
+                };
+                fetch('http://localhost:8081/api/v1/products', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Ошибка создания продукта');
+                        }
+                        return response.json();
+                    })
+                    .then(data => alert("Продукт создан: " + data.name))
+                    .catch(error => console.error("Ошибка:", error));
+            })
+            .catch(error => console.error("Ошибка получения поставщиков: ", error));
+    });
+
+    // Обновление продукта
+    document.getElementById("updateProductForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const productId = document.getElementById("updateProductId").value;
+        const productName = document.getElementById("updateProductName").value;
+        const storageLocation = document.getElementById("updateStorageLocation").value;
+        const productQuantity = document.getElementById("updateProductQuantity").value;
+        const supplierId = document.getElementById("updateSupplierId").value;
+        fetch('http://localhost:8082/api/v1/suppliers')
+            .then(response => response.json())
+            .then(suppliers => {
+                const supplierExists = suppliers.some(supplier => supplier.id === parseInt(supplierId, 10));
+
+                if (!supplierExists) {
+                    alert("Нет такого поставщика!");
+                    return;
+                }
+
+                const updatedProductData = {
+                    name: productName,
+                    storageLocation: storageLocation,
+                    quantity: productQuantity ? parseInt(productQuantity, 10) : undefined,
+                    supplierId: supplierId ? parseInt(supplierId, 10) : undefined
+                };
+
+                fetch(`http://localhost:8081/api/v1/products/${productId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedProductData)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Ошибка обновления продукта');
+                        }
+                        return response.json();
+                    })
+                    .then(data => alert("Продукт обновлен: " + data.name))
+                    .catch(error => console.error("Ошибка:", error));
+            })
+            .catch(error => console.error("Ошибка получения поставщиков: ", error));
+    });
+
+    // Удаление продукта
+    document.getElementById("deleteProductForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const productId = document.getElementById("deleteProductId").value;
+        fetch('http://localhost:8081/api/v1/products')
+            .then(response => response.json())
+            .then(products => {
+                const productExists = products.some(product => product.id === parseInt(productId, 10));
+
+                if (!productExists) {
+                    alert("Нет такого продукта!");
+                    return;
+                }
+                fetch(`http://localhost:8081/api/v1/products/${productId}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Продукт удален");
+                        } else {
+                            throw new Error('Ошибка удаления продукта');
+                        }
+                    })
+                    .catch(error => console.error("Ошибка:", error));
+            })
+            .catch(error => console.error("Ошибка получения продуктов: ", error));
     });
 
     function getAllProducts() {
@@ -99,7 +256,7 @@
                 productList.innerHTML = "";
                 data.forEach(product => {
                     const productDiv = document.createElement("div");
-                    productDiv.textContent = `Название: ${product.name}, Количество: ${product.quantity}`;
+                    productDiv.textContent = `ID: ${product.id}, Название: ${product.name}, Количество: ${product.quantity}, Локация хранения: ${product.storageLocation}, Поставщик ID: ${product.supplierId}`;
                     productList.appendChild(productDiv);
                 });
             })
@@ -114,7 +271,7 @@
                 productList.innerHTML = "";
                 data.forEach(product => {
                     const productDiv = document.createElement("div");
-                    productDiv.textContent = `Название: ${product.name}, Количество в наличии: ${product.quantity}`;
+                    productDiv.textContent = `ID: ${product.id}, Название: ${product.name}, Количество в наличии: ${product.quantity}, Локация хранения: ${product.storageLocation}, Поставщик ID: ${product.supplierId}`;
                     productList.appendChild(productDiv);
                 });
             })
@@ -129,7 +286,7 @@
                 productList.innerHTML = "";
                 data.forEach(product => {
                     const productDiv = document.createElement("div");
-                    productDiv.textContent = `Продукт для пополнения: ${product.name}, Количество: ${product.quantity}`;
+                    productDiv.textContent = `ID: ${product.id}, Продукт для пополнения: ${product.name}, Количество: ${product.quantity}, Локация хранения: ${product.storageLocation}, Поставщик ID: ${product.supplierId}`;
                     productList.appendChild(productDiv);
                 });
             })
@@ -145,21 +302,25 @@
                 productList.innerHTML = "";
                 data.forEach(product => {
                     const productDiv = document.createElement("div");
-                    productDiv.textContent = `Продукт поставщика: ${product.name}, Количество: ${product.quantity}`;
+                    productDiv.textContent = `ID: ${product.id}, Продукт поставщика: ${product.name}, Количество: ${product.quantity}, Локация хранения: ${product.storageLocation}, Поставщик ID: ${product.supplierId}`;
                     productList.appendChild(productDiv);
                 });
             })
             .catch(error => console.error("Ошибка получения продуктов поставщика: ", error));
     }
 
-    // Поставщики
-    document.getElementById("createSupplierForm").addEventListener("submit", function(e) {
+    // Создание нового поставщика
+    document.getElementById("createSupplierForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
         const supplierName = document.getElementById("supplierName").value;
+        const supplierAddress = document.getElementById("supplierAddress").value;
+        const supplierPhone = document.getElementById("supplierPhone").value;
 
         const supplierData = {
-            name: supplierName
+            name: supplierName,
+            address: supplierAddress,
+            phone: supplierPhone
         };
 
         fetch('http://localhost:8082/api/v1/suppliers', {
@@ -174,6 +335,63 @@
             .catch(error => console.error("Ошибка создания поставщика: ", error));
     });
 
+    // Обновление поставщика
+    document.getElementById("updateSupplierForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const supplierId = document.getElementById("updateIdSupplier").value;
+        const supplierName = document.getElementById("updateSupplierName").value;
+        const supplierAddress = document.getElementById("updateSupplierAddress").value;
+        const supplierPhone = document.getElementById("updateSupplierPhone").value;
+
+        const updatedSupplierData = {
+            name: supplierName,
+            address: supplierAddress,
+            phone: supplierPhone
+        };
+
+        fetch(`http://localhost:8082/api/v1/suppliers/${supplierId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedSupplierData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Нет такого поставщика');
+                }
+                return response.json();
+            })
+            .then(data => alert("Поставщик обновлен: " + data.name))
+            .catch(error => {
+                alert("Ошибка: " + error.message);
+                console.error("Ошибка:", error);
+            });
+    });
+
+    // Удаление поставщика
+    document.getElementById("deleteSupplierForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const supplierId = document.getElementById("deleteSupplierId").value;
+
+        fetch(`http://localhost:8082/api/v1/suppliers/${supplierId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Нет такого поставщика');
+                }
+                alert("Поставщик удален");
+            })
+            .catch(error => {
+                alert("Ошибка: " + error.message);
+                console.error("Ошибка:", error);
+            });
+    });
+
+    // Получение всех поставщиков
     function getAllSuppliers() {
         fetch('http://localhost:8082/api/v1/suppliers')
             .then(response => response.json())
@@ -182,34 +400,57 @@
                 supplierList.innerHTML = "";
                 data.forEach(supplier => {
                     const supplierDiv = document.createElement("div");
-                    supplierDiv.textContent = `Поставщик: ${supplier.name}`;
+                    supplierDiv.textContent = `ID: ${supplier.id}, Название: ${supplier.name}, Адрес: ${supplier.address}, Телефон: ${supplier.phone}`;
                     supplierList.appendChild(supplierDiv);
                 });
             })
             .catch(error => console.error("Ошибка получения поставщиков: ", error));
     }
 
-    // Заказы
-    document.getElementById("createOrderForm").addEventListener("submit", function(e) {
+    document.getElementById("createOrderForm").addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const orderDescription = document.getElementById("orderDescription").value;
+        const productIds = document.getElementById("orderProductIds").value
+            .split(",").map(id => parseInt(id.trim()));
+        const quantities = document.getElementById("orderQuantities").value
+            .split(",").map(q => parseInt(q.trim()));
+
+        if (productIds.length !== quantities.length) {
+            alert("Продукты и их количество имеют разный размер!");
+            return;
+        }
 
         const orderData = {
-            description: orderDescription
+            productIds: productIds,
+            quantities: quantities
         };
 
         fetch('http://localhost:8083/api/v1/orders', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
         })
-            .then(response => response.json())
-            .then(data => alert("Заказ создан: " + data.description))
-            .catch(error => console.error("Ошибка создания заказа: ", error));
+            .then(response => {
+                if (response.ok) {
+                    alert("Заказ создан!");
+                    return response.json();
+                } else {
+                    return response.text().then(errorMessage => {
+                        if (response.status === 404) {
+                            throw new Error("Товар не найден.");
+                        } else if (response.status === 400) {
+                            throw new Error("Недостаточно товара для одного из продуктов.");
+                        } else if (response.status === 500) {
+                            throw new Error("Ошибка сервера.");
+                        } else {
+                            throw new Error(errorMessage || "Неизвестная ошибка.");
+                        }
+                    });
+                }
+            })
     });
+
+
 
     function getAllOrders() {
         fetch('http://localhost:8083/api/v1/orders')
@@ -217,9 +458,9 @@
             .then(data => {
                 const orderList = document.getElementById("orderList");
                 orderList.innerHTML = "";
-                data.forEach(order => {
+                data.forEach(orderItem => {
                     const orderDiv = document.createElement("div");
-                    orderDiv.textContent = `Заказ: ${order.description}`;
+                    orderDiv.textContent = `Заказ ID: ${orderItem.id}, Товары: ${orderItem.productIds.join(", ")}, Количество: ${orderItem.quantities.join(", ")}`;
                     orderList.appendChild(orderDiv);
                 });
             })
@@ -234,7 +475,7 @@
                 const orderList = document.getElementById("orderList");
                 orderList.innerHTML = "";
                 const orderDiv = document.createElement("div");
-                orderDiv.textContent = `Заказ: ${data.description}`;
+                orderDiv.textContent = `Заказ ID: ${data.id}, Товары: ${data.productIds.join(", ")}, Количество: ${data.quantities.join(", ")}`;
                 orderList.appendChild(orderDiv);
             })
             .catch(error => console.error("Ошибка получения заказа по ID: ", error));

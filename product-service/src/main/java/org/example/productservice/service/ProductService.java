@@ -1,7 +1,7 @@
 package org.example.productservice.service;
 
 import jakarta.transaction.Transactional;
-import org.example.productservice.model.entity.ProductEntity;
+import org.example.productservice.model.ProductEntity;
 import org.example.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +51,6 @@ public class ProductService {
         return productRepository.findBySupplierId(supplierId);
     }
 
-    // Метод для уменьшения количества товара при создании заказа
     public void reduceQuantity(Long productId, Integer quantityToReduce) throws IllegalArgumentException {
         ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found"));
