@@ -432,7 +432,6 @@
         })
             .then(response => {
                 if (response.ok) {
-                    alert("Заказ создан!");
                     return response.json();
                 } else {
                     return response.text().then(errorMessage => {
@@ -448,6 +447,13 @@
                     });
                 }
             })
+            .then(data => {
+                alert("Заказ создан! ID: " + data.id);
+            })
+            .catch(error => {
+                console.error("Ошибка создания заказа: ", error);
+                alert("Ошибка: " + error.message);
+            });
     });
 
 
